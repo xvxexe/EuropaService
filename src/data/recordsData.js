@@ -1142,4 +1142,30 @@ export const recordsSeed = [
       }
     ]
   }
+  ,
+{
+  "id": 116,
+  "date": "2026-04-08",
+  "site": "Barcelò Roma",
+  "job": "Mezzi di cantiere",
+  "amount": 565.01,
+  "imponibile": 565.01,
+  "vat": 0,
+  "status": "Pagato",
+  "description": "Pneumatici Bobcat - saldo fattura 583",
+  "file": "bonifico_pneumatici_bobcat.pdf",
+  "supplier": "Cifarelli Gomme Srl",
+  "paymentMethod": "Bonifico",
+  "externalCompany": null,
+  "category": "Mezzi",
+  "uploadedBy": "Capo/Admin",
+  "items": [
+    {
+      "name": "Pneumatici Bobcat",
+      "qty": 1,
+      "total": 565.01,
+      "category": "Mezzi"
+    }
+  ]
+}
 ];
