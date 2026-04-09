@@ -735,13 +735,15 @@ export default function App() {
         </div>
 
         {role === "capo" ? (
-          <div className="sticky top-0 z-20 px-4 pb-3 bg-slate-100/95 backdrop-blur">
-            <SectionToggle value={bossViewMode} onChange={setBossViewMode} leftLabel="Vista semplice" rightLabel="Vista completa" />
+          <div className="sticky top-0 z-20 bg-slate-100/95 px-4 pb-3 backdrop-blur">
+            <SectionToggle
+              value={bossViewMode}
+              onChange={setBossViewMode}
+              leftLabel="Vista semplice"
+              rightLabel="Vista completa"
+            />
           </div>
         ) : null}
-)}
-          </div>
-        </div>
 
         <main className="space-y-4 px-4 pb-4">
           {screen === "dashboard" && role === "capo" && (
