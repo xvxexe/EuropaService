@@ -5,6 +5,7 @@ import { recordsSeed } from "./data/recordsData";
 import { currency, dateLabel, monthKey } from "./utils/formatters";
 
 function cn(...parts) {
+  
   return parts.filter(Boolean).join(" ");
 }
 
