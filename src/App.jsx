@@ -7,19 +7,27 @@ export default function App() {
 
   const API_URL = "https://script.google.com/macros/s/AKfycbz0EWvBcz3m45D_FuFd6iU70ZjV1ikyLa_zEcP_0ZmB4KTnzHbybx1p-QuS-5u9sZAL/exec";
 
-  const login = async () => {
+const login = async () => {
+  try {
     const res = await fetch(API_URL, {
       method: "POST",
       body: JSON.stringify({ password })
     });
+
     const json = await res.json();
+    console.log(json);
+
     if (json.success) {
       setLogged(true);
       setData(json.data);
     } else {
-      alert("Password errata");
+      alert(json.message || "Password errata");
     }
-  };
+  } catch (err) {
+    console.error(err);
+    alert("Errore di collegamento con Apps Script");
+  }
+};
 
   if (!logged) {
     return (
