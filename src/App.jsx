@@ -5,7 +5,7 @@ export default function App() {
   const [logged, setLogged] = useState(false);
   const [data, setData] = useState(null);
 
-  const API_URL = "https://script.google.com/macros/s/AKfycbwXc28oOVwFrNFkjnCSFrMSuyhaG1qww4Tclc1TH3X1BuVRXELTbGEj2CKFSpQSYUlE/exec";
+  const API_URL = "https://script.google.com/macros/s/AKfycbzX90rXYYR_HJ5EYFgrVQ1r1v35Q1YqgwwbBJztPJN0hRuG4dFBLuFJmZ8ttnzp3CtG/exec";
 
 const login = async () => {
   try {
