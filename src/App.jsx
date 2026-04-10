@@ -11,14 +11,13 @@ const login = async () => {
   try {
     const res = await fetch(API_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify({ password })
     });
 
-    const json = await res.json();
-    console.log(json);
+    const text = await res.text();
+    console.log("RAW RESPONSE:", text);
+
+    const json = JSON.parse(text);
 
     if (json.success) {
       setLogged(true);
