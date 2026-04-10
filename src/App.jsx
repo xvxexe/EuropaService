@@ -5,7 +5,7 @@ export default function App() {
   const [logged, setLogged] = useState(false);
   const [data, setData] = useState(null);
 
-  const API_URL = "INCOLLA_URL_APPS_SCRIPT";
+  const API_URL = "https://script.google.com/macros/s/AKfycbz0EWvBcz3m45D_FuFd6iU70ZjV1ikyLa_zEcP_0ZmB4KTnzHbybx1p-QuS-5u9sZAL/exec";
 
   const login = async () => {
     const res = await fetch(API_URL, {
