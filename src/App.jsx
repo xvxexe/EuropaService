@@ -270,7 +270,15 @@ export default function App() {
             </div>
           </header>
 
-          <main className="content">
+<div className="mobileSearch mobileOnly">
+  <input
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    placeholder="Cerca spese o documenti"
+  />
+</div>
+
+<main className="content">
             {activeView === "dashboard" && (
               <div className="stack">
                 <section className="hero">
