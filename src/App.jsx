@@ -659,6 +659,7 @@ button{cursor:pointer}
 .loadingTitle{font-size:14px;font-weight:700;color:#0f172a}
 .loadingText{margin-top:2px;font-size:13px;line-height:1.35;color:#64748b}
 @keyframes spin{to{transform:rotate(360deg)}}
+
 .app{min-height:100vh;display:flex;flex-direction:column}
 .sidebar{width:290px;padding:18px;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;gap:18px}
 .brandCard{background:linear-gradient(135deg,#0f172a 0%,#172554 100%);color:#fff;border-radius:22px;padding:18px}
@@ -668,71 +669,102 @@ button{cursor:pointer}
 .brandText{margin-top:10px;color:#cbd5e1;line-height:1.5;font-size:13px;max-width:20ch}
 .section{display:grid;gap:8px}
 .sectionLabel{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#64748b;font-weight:600}
-.select,.searchWrap input{width:100%;border:1px solid #cbd5e1;background:#f8fafc;outline:none;padding:13px 14px;border-radius:14px}
+.select,.searchWrap input,.mobileSearch input{width:100%;border:1px solid #cbd5e1;background:#fff;outline:none;padding:13px 14px;border-radius:14px}
 .nav{display:grid;gap:6px}
 .navBtn{border:0;background:transparent;border-radius:14px;padding:13px 14px;text-align:left;font-weight:600;color:#475569}
 .navBtnActive{background:#0f172a;color:#fff}
+
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
-.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px}
 .topTitle{margin-top:4px;font-size:17px;font-weight:700;letter-spacing:-.02em}
 .topbarRight{display:flex;align-items:center;gap:10px}
 .searchWrap{min-width:280px}
 .pill{background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:10px 14px;font-size:12px;color:#475569;font-weight:600}
-.content{padding:14px 14px 90px}
-.stack{display:grid;gap:16px}
-.hero,.panel,.card{background:#fff;border:1px solid #e2e8f0;border-radius:22px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
-.hero{padding:20px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;background:linear-gradient(135deg,#0f172a 0%,#172554 100%);color:#fff;flex-direction:column}
-.hero h1{margin:10px 0 6px;font-size:clamp(22px,7vw,30px);line-height:1.08;letter-spacing:-.03em;font-weight:700}
-.hero p{margin:0;color:#dbeafe;font-size:15px;line-height:1.45}
-.heroPill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:999px;font-weight:600;white-space:nowrap}
-.statsGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.statCard{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:14px;min-height:88px}
+.mobileSearch{padding:10px 12px 0}
+.mobileSearch input{box-shadow:0 2px 8px rgba(15,23,42,.03)}
+
+.content{padding:12px 12px 92px}
+.stack{display:grid;gap:14px}
+
+.hero,.panel,.card,.expenseCard{background:#fff;border:1px solid #e2e8f0;border-radius:20px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.hero{padding:18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;background:linear-gradient(135deg,#0f172a 0%,#172554 100%);color:#fff;flex-direction:column}
+.hero h1{margin:8px 0 4px;font-size:clamp(20px,6.6vw,28px);line-height:1.08;letter-spacing:-.03em;font-weight:700}
+.hero p{margin:0;color:#dbeafe;font-size:14px;line-height:1.45}
+.heroPill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);padding:9px 12px;border-radius:999px;font-weight:600;white-space:nowrap;font-size:12px}
+
+.statsGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.statCard{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px;min-height:82px}
 .statCardDark{background:#0f172a;color:#fff;border-color:#0f172a}
 .statLabel{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#64748b;font-weight:600}
 .statCardDark .statLabel{color:#94a3b8}
-.statValue{margin-top:8px;font-size:20px;font-weight:700;line-height:1.05;letter-spacing:-.02em}
-.grid2{display:grid;grid-template-columns:1fr;gap:16px}
-.panel{padding:18px}
-.panelTitle{font-size:17px;font-weight:700;line-height:1.18;letter-spacing:-.02em}
-.panelSub{margin-top:6px;color:#64748b;font-size:14px;line-height:1.45}
+.statValue{margin-top:7px;font-size:18px;font-weight:700;line-height:1.05;letter-spacing:-.02em}
+
+.grid2{display:grid;grid-template-columns:1fr;gap:14px}
+.panel{padding:16px}
+.panelTitle{font-size:16px;font-weight:700;line-height:1.18;letter-spacing:-.02em}
+.panelSub{margin-top:5px;color:#64748b;font-size:13px;line-height:1.45}
+
 .list{display:grid;gap:10px;margin-top:14px}
 .listRow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;background:#f8fafc;border-radius:16px;padding:12px 13px;border:0;width:100%}
 .listRow.clickable:hover{background:#eef2ff}
 .rowTitle{font-weight:600;text-align:left;font-size:14px;line-height:1.35}
 .rowSub{margin-top:4px;color:#64748b;font-size:13px;text-align:left;line-height:1.35}
 .rowAmount{white-space:nowrap;font-weight:600;font-size:14px}
-.pageHeader h1{margin:0;font-size:26px;line-height:1.08;letter-spacing:-.03em;font-weight:700}
+
+.pageHeader h1{margin:0;font-size:24px;line-height:1.08;letter-spacing:-.03em;font-weight:700}
 .pageHeader p{margin:8px 0 0;color:#64748b;font-size:14px;line-height:1.45}
-.cards{display:grid;grid-template-columns:1fr;gap:14px}
-.card{padding:16px;text-align:left}
+
+.cards{display:grid;grid-template-columns:1fr;gap:12px}
+.card{padding:14px;text-align:left}
 .cardHead,.cardMeta{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.cardTitle{font-size:17px;font-weight:700;line-height:1.18;letter-spacing:-.02em}
-.cardSub{margin-top:6px;color:#64748b;font-size:13px;line-height:1.4}
+.cardTitle{font-size:16px;font-weight:700;line-height:1.18;letter-spacing:-.02em}
+.cardSub{margin-top:5px;color:#64748b;font-size:12px;line-height:1.4}
 .status{background:#dcfce7;color:#166534;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:600}
-.miniGrid{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.miniGrid{margin-top:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
 .miniGrid>div{background:#f8fafc;border-radius:16px;padding:10px}
 .miniLabel{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.12em;display:block}
 .miniValue{margin-top:6px;font-weight:700;font-size:14px}
-.tableWrap{overflow:auto;background:#fff;border:1px solid #e2e8f0;border-radius:20px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
-.table{width:100%;border-collapse:collapse;min-width:980px}
-.table thead{background:#f8fafc}
-.table th,.table td{padding:12px 13px;text-align:left;border-bottom:1px solid #e2e8f0;font-size:13px}
-.table th{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#64748b;font-weight:600}
+
 .preview{margin-top:14px;border:1px dashed #cbd5e1;background:#f8fafc;border-radius:20px;padding:26px 16px;text-align:center}
 .previewIcon{font-size:42px}
 .previewTitle{margin-top:12px;font-size:18px;font-weight:700;line-height:1.15}
 .previewText{margin:8px auto 0;max-width:440px;color:#64748b;line-height:1.5;font-size:14px}
 .previewPlaceholder{margin-top:16px;display:inline-flex;padding:12px 16px;background:#fff;border-radius:16px;border:1px solid #e2e8f0;font-weight:600;word-break:break-word;font-size:14px}
-.mobileNav{position:sticky;bottom:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid #e2e8f0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:10px 12px env(safe-area-inset-bottom,10px)}
-.mobileNavBtn{border:0;background:transparent;border-radius:16px;padding:9px 8px;color:#64748b;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;font-weight:600}
+
+.tableWrap{overflow:auto;background:#fff;border:1px solid #e2e8f0;border-radius:20px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.table{width:100%;border-collapse:collapse;min-width:980px}
+.table thead{background:#f8fafc}
+.table th,.table td{padding:12px 13px;text-align:left;border-bottom:1px solid #e2e8f0;font-size:13px}
+.table th{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#64748b;font-weight:600}
+
+.expenseCards{display:grid;gap:12px}
+.expenseCard{padding:14px}
+.expenseCardTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.expenseAmount{white-space:nowrap;font-size:15px;font-weight:700}
+.expenseMetaGrid{margin-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.expenseMetaGrid span{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#64748b;font-weight:600}
+.expenseMetaGrid strong{display:block;margin-top:4px;font-size:13px;line-height:1.35;font-weight:600;color:#0f172a}
+
+.mobileNav{position:sticky;bottom:0;z-index:30;background:rgba(255,255,255,.98);backdrop-filter:blur(8px);border-top:1px solid #e2e8f0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:8px 10px env(safe-area-inset-bottom,10px)}
+.mobileNavBtn{border:0;background:transparent;border-radius:14px;padding:8px 6px;color:#64748b;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:600}
 .mobileNavBtnActive{background:#0f172a;color:#fff}
+
 .backButton{width:fit-content}
 .desktopOnly{display:none}
 .mobileOnly{display:grid}
+
+@media (max-width:420px){
+  .statsGrid{grid-template-columns:1fr}
+  .expenseMetaGrid{grid-template-columns:1fr}
+  .heroPill{font-size:12px}
+  .topTitle{font-size:16px}
+}
+
 @media (min-width:901px){
   .app{flex-direction:row}
   .desktopOnly{display:block}
   .mobileOnly{display:none}
+  .mobileSearch{display:none}
   .content{padding:24px}
   .stack{gap:24px}
   .topbar{padding:18px 24px;gap:16px}
@@ -740,13 +772,11 @@ button{cursor:pointer}
   .statsGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
   .grid2{grid-template-columns:1.1fr 1fr;gap:20px}
   .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .expenseCards{display:none}
 }
+
 @media (min-width:1180px){
   .statsGrid{grid-template-columns:repeat(6,minmax(0,1fr))}
   .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-@media (max-width:560px){
-  .hero h1{font-size:26px}
-  .statValue{font-size:18px}
 }
 `;
