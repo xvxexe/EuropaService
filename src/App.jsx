@@ -370,6 +370,7 @@ function LoginScreen({ password, setPassword, onLogin, loading, error }) {
                   if (e.key === "Enter") onLogin();
                 }}
                 className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none"
+                style={{ fontSize: "16px", transform: "translateZ(0)" }}
               />
             </div>
             <PrimaryButton onClick={onLogin} disabled={loading} className="w-full">
