@@ -60,33 +60,6 @@ function Pill({ active, children, onClick }) {
   );
 }
 
-function SectionToggle({ value, onChange, leftLabel = "Semplice", rightLabel = "Completa" }) {
-  return (
-    <div className="rounded-2xl bg-white p-1 shadow-sm border border-slate-200">
-      <div className="grid grid-cols-2 gap-1">
-        <button
-          onClick={() => onChange("simple")}
-          className={cn(
-            "rounded-xl px-3 py-2 text-xs font-semibold transition",
-            value === "simple" ? "bg-slate-900 text-white" : "text-slate-500"
-          )}
-        >
-          {leftLabel}
-        </button>
-        <button
-          onClick={() => onChange("advanced")}
-          className={cn(
-            "rounded-xl px-3 py-2 text-xs font-semibold transition",
-            value === "advanced" ? "bg-slate-900 text-white" : "text-slate-500"
-          )}
-        >
-          {rightLabel}
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function HeaderBlock({ eyebrow, title, subtitle, action }) {
   return (
     <div className="px-1">
@@ -451,9 +424,6 @@ export default function App() {
   const [activeSiteId, setActiveSiteId] = useState("");
   const [screen, setScreen] = useState("dashboard");
 
-  const [bossViewMode, setBossViewMode] = useState("simple");
-  const [archiveViewMode, setArchiveViewMode] = useState("simple");
-  const [siteViewMode, setSiteViewMode] = useState("simple");
 
   const [expenseSearch, setExpenseSearch] = useState("");
   const [documentSearch, setDocumentSearch] = useState("");
@@ -897,17 +867,6 @@ export default function App() {
           </Card>
         </div>
 
-        {screen === "dashboard" ? (
-          <div className="sticky top-0 z-20 bg-slate-100/95 px-4 pb-3 backdrop-blur">
-            <SectionToggle
-              value={bossViewMode}
-              onChange={setBossViewMode}
-              leftLabel="Vista semplice"
-              rightLabel="Vista completa"
-            />
-          </div>
-        ) : null}
-
         <main className="space-y-4 px-4 pb-4">
           {screen === "dashboard" && (
             <>
@@ -923,16 +882,12 @@ export default function App() {
                 <StatCard label="Documenti" value={String(totals.docs)} hint="Spese registrate" />
                 <StatCard label="Imponibile" value={currency(totals.imponibile)} hint="Base imponibile" />
                 <StatCard label="IVA totale" value={currency(totals.vat)} hint="IVA complessiva" />
-                {bossViewMode === "advanced" ? (
-                  <StatCard label="Spesa media" value={currency(totals.average)} hint="Media per documento" />
-                ) : null}
-                {bossViewMode === "advanced" ? (
-                  <StatCard
-                    label="Lavorazione principale"
-                    value={topJob ? topJob.job : "—"}
-                    hint={topJob ? currency(topJob.total) : "Nessun dato"}
-                  />
-                ) : null}
+                <StatCard label="Spesa media" value={currency(totals.average)} hint="Media per documento" />
+                <StatCard
+                  label="Lavorazione principale"
+                  value={topJob ? topJob.job : "—"}
+                  hint={topJob ? currency(topJob.total) : "Nessun dato"}
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -983,30 +938,28 @@ export default function App() {
                 data={jobStats.map((item) => ({ label: item.job, value: item.total }))}
               />
 
-              {bossViewMode === "advanced" ? (
-                <>
-                  <HorizontalChart
-                    title="Spese per categoria"
-                    subtitle="Materiali, vitto, alloggi, noleggi e altre aree di costo."
-                    data={categoryBreakdown}
-                  />
-                  <HorizontalChart
-                    title="Fornitori principali"
-                    subtitle="Chi pesa di più sul totale spese."
-                    data={supplierBreakdown}
-                  />
-                  <HorizontalChart
-                    title="Metodi di pagamento"
-                    subtitle="Distribuzione tra bonifico, carta, contanti e conto."
-                    data={paymentBreakdown}
-                  />
-                  <HorizontalChart
-                    title="Caricamenti per utente"
-                    subtitle="Controllo operativo su chi sta registrando i documenti."
-                    data={uploaderBreakdown}
-                  />
-                </>
-              ) : null}
+              <>
+                <HorizontalChart
+                  title="Spese per categoria"
+                  subtitle="Materiali, vitto, alloggi, noleggi e altre aree di costo."
+                  data={categoryBreakdown}
+                />
+                <HorizontalChart
+                  title="Fornitori principali"
+                  subtitle="Chi pesa di più sul totale spese."
+                  data={supplierBreakdown}
+                />
+                <HorizontalChart
+                  title="Metodi di pagamento"
+                  subtitle="Distribuzione tra bonifico, carta, contanti e conto."
+                  data={paymentBreakdown}
+                />
+                <HorizontalChart
+                  title="Caricamenti per utente"
+                  subtitle="Controllo operativo su chi sta registrando i documenti."
+                  data={uploaderBreakdown}
+                />
+              </>
 
               <Card className="p-4">
                 <div className="flex items-center justify-between gap-3">
@@ -1029,7 +982,7 @@ export default function App() {
                         onOpen={setSelectedExpense}
                         onOpenJob={openJob}
                         canOpenJob
-                        showMeta={bossViewMode === "advanced"}
+                        showMeta
                       />
                     ))
                   ) : (
@@ -1049,7 +1002,7 @@ export default function App() {
                 eyebrow="Archivio"
                 title="Archivio spese"
                 subtitle="Ricerca, filtri e riepilogo in una sola schermata."
-                action={<SectionToggle value={archiveViewMode} onChange={setArchiveViewMode} />}
+                action={null}
               />
 
               <Card className="p-4 space-y-3">
@@ -1085,18 +1038,16 @@ export default function App() {
                 />
               </div>
 
-              {archiveViewMode === "advanced" ? (
-                <div className="grid grid-cols-2 gap-3">
-                  <StatCard
-                    label="IVA visibile"
-                    value={currency(filteredRecords.reduce((sum, record) => sum + toNumber(record.vat), 0))}
-                  />
-                  <StatCard
-                    label="Imponibile visibile"
-                    value={currency(filteredRecords.reduce((sum, record) => sum + toNumber(record.imponibile), 0))}
-                  />
-                </div>
-              ) : null}
+              <div className="grid grid-cols-2 gap-3">
+                <StatCard
+                  label="IVA visibile"
+                  value={currency(filteredRecords.reduce((sum, record) => sum + toNumber(record.vat), 0))}
+                />
+                <StatCard
+                  label="Imponibile visibile"
+                  value={currency(filteredRecords.reduce((sum, record) => sum + toNumber(record.imponibile), 0))}
+                />
+              </div>
 
               <div className="space-y-3">
                 {filteredRecords.length ? (
@@ -1107,7 +1058,7 @@ export default function App() {
                       onOpen={setSelectedExpense}
                       onOpenJob={openJob}
                       canOpenJob
-                      showMeta={archiveViewMode === "advanced"}
+                      showMeta
                     />
                   ))
                 ) : (
@@ -1171,7 +1122,7 @@ export default function App() {
                 eyebrow="Cantiere"
                 title={activeSiteName}
                 subtitle="Una sola schermata per capire il cantiere e navigare le lavorazioni."
-                action={<SectionToggle value={siteViewMode} onChange={setSiteViewMode} />}
+                action={null}
               />
 
               <Card className="p-4 lg:p-5">
@@ -1187,7 +1138,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className={cn("mt-4 grid gap-2", siteViewMode === "advanced" ? "grid-cols-2 lg:grid-cols-4" : "grid-cols-2")}>
+                <div className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-4">
                   <div className="rounded-2xl bg-slate-50 p-3 text-center">
                     <div className="text-[10px] uppercase tracking-[0.12em] text-slate-400">
                       Lavorazioni
@@ -1206,24 +1157,20 @@ export default function App() {
                     </div>
                     <div className="mt-1 text-sm font-semibold">{currency(totals.total)}</div>
                   </div>
-                  {siteViewMode === "advanced" ? (
-                    <div className="rounded-2xl bg-slate-50 p-3 text-center">
-                      <div className="text-[10px] uppercase tracking-[0.12em] text-slate-400">
-                        IVA totale
-                      </div>
-                      <div className="mt-1 text-sm font-semibold">{currency(totals.vat)}</div>
+                  <div className="rounded-2xl bg-slate-50 p-3 text-center">
+                    <div className="text-[10px] uppercase tracking-[0.12em] text-slate-400">
+                      IVA totale
                     </div>
-                  ) : null}
+                    <div className="mt-1 text-sm font-semibold">{currency(totals.vat)}</div>
+                  </div>
                 </div>
               </Card>
 
-              {siteViewMode === "advanced" ? (
-                <HorizontalChart
-                  title="Spese per lavorazione"
-                  subtitle="Distribuzione del costo tra le varie lavorazioni del cantiere."
-                  data={jobStats.map((item) => ({ label: item.job, value: item.total }))}
-                />
-              ) : null}
+              <HorizontalChart
+                title="Spese per lavorazione"
+                subtitle="Distribuzione del costo tra le varie lavorazioni del cantiere."
+                data={jobStats.map((item) => ({ label: item.job, value: item.total }))}
+              />
 
               <div className="space-y-3">
                 {jobStats.length ? (
@@ -1232,7 +1179,7 @@ export default function App() {
                       key={item.jobId}
                       item={item}
                       onOpen={openJob}
-                      advanced={siteViewMode === "advanced"}
+                      advanced
                     />
                   ))
                 ) : (
