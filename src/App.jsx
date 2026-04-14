@@ -1068,26 +1068,36 @@ export default function App() {
                 </div>
               </Card>
 
-              <div className="grid grid-cols-2 gap-3">
-                <StatCard label="Movimenti visibili" value={String(filteredRecords.length)} hint="Dopo i filtri" />
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                 <StatCard
-                  label="Totale visibile"
-                  value={currency(filteredRecords.reduce((sum, record) => sum + toNumber(record.amount), 0))}
-                  hint="Somma selezionata"
+                  label="Movimenti visibili"
+                  value={String(filteredRecords.length)}
+                  hint="Dopo i filtri"
+                />
+                <StatCard
+                  label="Totale master"
+                  value={currency(totals.total)}
+                  hint="Stessa fonte di Home"
                   emphasis
+                />
+                <StatCard
+                  label="IVA master"
+                  value={currency(totals.vat)}
+                  hint="Riepilogo master"
+                />
+                <StatCard
+                  label="Imponibile master"
+                  value={currency(totals.imponibile)}
+                  hint="Riepilogo master"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <StatCard
-                  label="IVA visibile"
-                  value={currency(filteredRecords.reduce((sum, record) => sum + toNumber(record.vat), 0))}
-                />
-                <StatCard
-                  label="Imponibile visibile"
-                  value={currency(filteredRecords.reduce((sum, record) => sum + toNumber(record.imponibile), 0))}
-                />
-              </div>
+              <Card className="p-4">
+                <div className="text-xs leading-5 text-slate-500">
+                  I box riepilogo di questa schermata usano la stessa fonte della Home e dei Documenti:
+                  il riepilogo master/API. I filtri qui sotto agiscono sulla lista dei movimenti, non sui totali master.
+                </div>
+              </Card>
 
               <div className="space-y-3">
                 {filteredRecords.length ? (
@@ -1133,11 +1143,24 @@ export default function App() {
                     hint="Dopo la ricerca"
                   />
                   <StatCard
-                    label="Totale documenti"
-                    value={currency(filteredDocuments.reduce((sum, doc) => sum + toNumber(doc.amount), 0))}
-                    hint="Importi collegati"
+                    label="Documenti master"
+                    value={String(totals.docs)}
+                    hint="Stessa fonte di Home"
+                  />
+                  <StatCard
+                    label="Totale master"
+                    value={currency(totals.total)}
+                    hint="Riepilogo master"
                     emphasis
                   />
+                  <StatCard
+                    label="Imponibile master"
+                    value={currency(totals.imponibile)}
+                    hint="Riepilogo master"
+                  />
+                </div>
+                <div className="rounded-2xl bg-slate-50 px-4 py-3 text-xs leading-5 text-slate-500">
+                  Anche qui i box riepilogo usano il riepilogo master/API per restare coerenti con Home e Spese.
                 </div>
               </Card>
 
