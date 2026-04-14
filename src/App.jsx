@@ -119,6 +119,7 @@ function EmptyState({ title, subtitle, action }) {
   );
 }
 
+
 function HorizontalChart({ title, subtitle, data, mode = "single" }) {
   const safe = data?.length ? data : [{ label: "Nessun dato", value: 0 }];
   const maxValue = Math.max(
@@ -128,56 +129,95 @@ function HorizontalChart({ title, subtitle, data, mode = "single" }) {
     1
   );
 
+  const totalPrimary = safe.reduce(
+    (sum, item) => sum + (mode === "double" ? item.primary || 0 : item.value || 0),
+    0
+  );
+
   return (
     <Card className="p-4">
-      <div className="text-sm font-semibold text-slate-900">{title}</div>
-      {subtitle ? <div className="mt-1 text-xs text-slate-500">{subtitle}</div> : null}
-      <div className="mt-4 space-y-3">
-        {safe.map((item) => (
-          <div key={item.label} className="rounded-2xl bg-slate-50 p-3">
-            <div className="flex items-center justify-between gap-3 text-[11px] text-slate-500">
-              <span className="truncate">{item.label}</span>
-              <span>
-                {mode === "double"
-                  ? `${currency(item.primary || 0)} • IVA ${currency(item.secondary || 0)}`
-                  : currency(item.value || 0)}
-              </span>
-            </div>
-            {mode === "double" ? (
-              <div className="mt-3 space-y-2">
-                <div>
-                  <div className="mb-1 text-[10px] text-slate-400">Spesa</div>
-                  <div className="h-3 rounded-full bg-white overflow-hidden border border-slate-200">
-                    <div
-                      className="h-full rounded-full bg-slate-900"
-                      style={{ width: `${Math.max(4, ((item.primary || 0) / maxValue) * 100)}%` }}
-                    />
-                  </div>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-sm font-semibold text-slate-900">{title}</div>
+          {subtitle ? <div className="mt-1 text-xs text-slate-500">{subtitle}</div> : null}
+        </div>
+        <div className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium text-slate-700">
+          {safe.length} voci
+        </div>
+      </div>
+
+      <div className="mt-4 overflow-hidden rounded-2xl border border-slate-100 bg-slate-50">
+        {safe.map((item, index) => {
+          const primary = mode === "double" ? item.primary || 0 : item.value || 0;
+          const secondary = mode === "double" ? item.secondary || 0 : 0;
+          const pct = maxValue ? (primary / maxValue) * 100 : 0;
+          const secondaryPct = maxValue ? (secondary / maxValue) * 100 : 0;
+          const share = totalPrimary ? Math.round((primary / totalPrimary) * 100) : 0;
+
+          return (
+            <div
+              key={item.label}
+              className={cn(
+                "px-3 py-3",
+                index !== safe.length - 1 && "border-b border-slate-100"
+              )}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-sm font-medium text-slate-900">{item.label}</div>
+
+                  {mode === "double" ? (
+                    <div className="mt-1 flex flex-wrap gap-2 text-[11px] text-slate-500">
+                      <span className="rounded-full border border-slate-200 bg-white px-2 py-1">
+                        Spesa {currency(primary)}
+                      </span>
+                      <span className="rounded-full border border-slate-200 bg-white px-2 py-1">
+                        IVA {currency(secondary)}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="mt-1 text-[11px] text-slate-500">
+                      {currency(primary)} • {share}%
+                    </div>
+                  )}
                 </div>
-                <div>
-                  <div className="mb-1 text-[10px] text-slate-400">IVA</div>
-                  <div className="h-3 rounded-full bg-white overflow-hidden border border-slate-200">
+
+                <div className="text-[11px] font-medium text-slate-400">#{index + 1}</div>
+              </div>
+
+              <div className="mt-3 space-y-2">
+                <div className="h-2 overflow-hidden rounded-full border border-slate-200 bg-white">
+                  <div
+                    className="h-full rounded-full bg-slate-900"
+                    style={{
+                      width:
+                        primary > 0 ? `${Math.max(4, Math.min(100, pct))}%` : "0%"
+                    }}
+                  />
+                </div>
+
+                {mode === "double" ? (
+                  <div className="h-2 overflow-hidden rounded-full border border-slate-200 bg-white">
                     <div
                       className="h-full rounded-full bg-slate-400"
-                      style={{ width: `${Math.max(4, ((item.secondary || 0) / maxValue) * 100)}%` }}
+                      style={{
+                        width:
+                          secondary > 0
+                            ? `${Math.max(4, Math.min(100, secondaryPct))}%`
+                            : "0%"
+                      }}
                     />
                   </div>
-                </div>
+                ) : null}
               </div>
-            ) : (
-              <div className="mt-3 h-3 rounded-full bg-white overflow-hidden border border-slate-200">
-                <div
-                  className="h-full rounded-full bg-slate-900"
-                  style={{ width: `${Math.max(4, ((item.value || 0) / maxValue) * 100)}%` }}
-                />
-              </div>
-            )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
     </Card>
   );
 }
+
 
 function SummaryBanner({ totalRecords, totalAmount }) {
   const safeTotalAmount = Number.isFinite(totalAmount) ? totalAmount : 0;
